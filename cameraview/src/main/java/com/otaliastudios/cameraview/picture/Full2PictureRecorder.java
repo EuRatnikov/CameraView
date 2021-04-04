@@ -147,14 +147,6 @@ public class Full2PictureRecorder extends FullPictureRecorder
         // Just like Camera1, unfortunately, the camera might rotate the image
         // and put EXIF=0 instead of respecting our EXIF and leave the image unaltered.
         mResult.rotation = 0;
-        try {
-            ExifInterface exif = new ExifInterface(new ByteArrayInputStream(mResult.data));
-            int exifOrientation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION,
-                    ExifInterface.ORIENTATION_NORMAL);
-            mResult.rotation = ExifHelper.getOrientation(exifOrientation);
-        } catch (IOException ignore) {
-            // Should not happen
-        }
     }
 
     private void readRawImage(@NonNull Image image) {

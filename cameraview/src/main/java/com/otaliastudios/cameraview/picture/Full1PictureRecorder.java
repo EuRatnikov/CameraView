@@ -61,16 +61,7 @@ public class Full1PictureRecorder extends FullPictureRecorder {
                         @Override
                         public void onPictureTaken(byte[] data, final Camera camera) {
                             LOG.i("take(): got picture callback.");
-                            int exifRotation;
-                            try {
-                                ExifInterface exif = new ExifInterface(new ByteArrayInputStream(data));
-                                int exifOrientation = exif.getAttributeInt(
-                                        ExifInterface.TAG_ORIENTATION,
-                                        ExifInterface.ORIENTATION_NORMAL);
-                                exifRotation = ExifHelper.getOrientation(exifOrientation);
-                            } catch (IOException e) {
-                                exifRotation = 0;
-                            }
+                            int exifRotation = 0;
                             mResult.data = data;
                             mResult.rotation = exifRotation;
                             LOG.i("take(): starting preview again. ", Thread.currentThread());
